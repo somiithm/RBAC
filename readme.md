@@ -1,27 +1,73 @@
-## Laravel PHP Framework
+## Role Based Access Control
+Role Based Access Control implemented in this repository is based on users, roles, resources, and permissions. This is purely a demo project, but is aimed at making it extensible to anything as a resource, and any action associated with it. We have three models
+```
+1. User
+2. Role
+3. Resource
+```
+The following relation ships bind the resources,users and roles
+```
+1. User-Role
+2. Resource-Role (permissions)
+```
+Resource-Role is basically a permission model, with an additional json column, stating its permissions.
+It is basically inspired but Amazon Web Services' way of modeling access control, by way of users, policies and user-policy mapping. A policy is nothing but a json document stating the access level.
+Instead of having an policy framework, we have resources, and permissions which tell what actions are allowed for which role.
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Installation
+- php installation
+```
+sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php 
+sudo apt-get update
+sudo apt-get install php7.0-fpm php7.0-mysql php7.0-curl php7.0-mcrypt php7.0-mbstring php7.0-xml php-xdebug whois
+php -v #should reflect version 7
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+```
+- Mysql 5.7 installation
+```
+wget https://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
+dpkg -i mysql-apt-config_0.6.0-1_all.deb #select MySQL 5.7 if not already selected and apply.
+sudo apt-get install mysql-server
+mysqladmin -u root -p version
+```
+- Project space setup
+```
+git clone git@github.com:somiithm/RBAC.git <folder name>
+cd <folder name>
+composer install
+cp .env.example .env
+php artisan migrate
+php artisan db:seed
+php artisan serve
+```
+- open link http://localhost:8000
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+> .env must have all the right credentials to access Mysql 5.7
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
-
-## Official Documentation
-
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## Users Created by DB seeding
+- Admin 
+```
+email - admin@user.com
+password - Admin
+```
+- ReadUser
+```
+email - read@user.com
+password - ReadUser
+```
+- WriteUser
+```
+email - write@user.com
+password - WriteUser
+```
+- DeleteUser
+```
+email - delete@user.com
+password - DeleteUser
+```
+- ReadWriteUser
+```
+email - readwrite@user.com
+password - ReadWriteUser
+```
