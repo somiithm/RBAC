@@ -11,7 +11,7 @@ The following relation ships bind the resources,users and roles
 2. Resource-Role (permissions)
 ```
 Resource-Role is basically a permission model, with an additional json column, stating its permissions.
-It is basically inspired but Amazon Web Services' way of modeling access control, by way of users, policies and user-policy mapping. A policy is nothing but a json document stating the access level.
+It is basically inspired by Amazon Web Services' way of modeling access control, by way of users, policies and user-policy mapping. A policy is nothing but a json document stating the access level.
 Instead of having an policy framework, we have resources, and permissions which tell what actions are allowed for which role.
 
 ## Assumptions
@@ -48,6 +48,8 @@ php artisan serve
 - open link http://localhost:8000
 
 > .env must have all the right credentials to access Mysql 5.7
+
+> please make sure to make a new Database in mysql before running steps from php artisan migrate and later
 
 ## Users Created by DB seeding
 - Admin 
