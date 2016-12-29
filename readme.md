@@ -14,6 +14,10 @@ Resource-Role is basically a permission model, with an additional json column, s
 It is basically inspired but Amazon Web Services' way of modeling access control, by way of users, policies and user-policy mapping. A policy is nothing but a json document stating the access level.
 Instead of having an policy framework, we have resources, and permissions which tell what actions are allowed for which role.
 
+## Assumptions
+1. Assuming that there will be some admin panel to add resources, roles and users and also allocate permissions, have made only a nominal API for Users, Roles and Resources
+2. Have made a middleware to check RBAC. However the access control check can be done at any level, a middleware is made and routes specify which action and resource is used to access the route
+
 ## Installation
 - php installation
 ```

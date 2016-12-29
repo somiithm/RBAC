@@ -19,8 +19,12 @@ class MainController extends Controller
     public function index()
     {
         $routes = Route::getRoutes()->getRoutes();
-        $routes = array_filter($routes,function($e){
-           return !in_array($e->uri(),['loginPage','/','login','logout']);
+        $routes = array_filter($routes, function($e){
+            $actions = $e->getAction();
+            if(isset($actions['group_name']) && $actions['group_name'] == 'demo')
+                return true;
+            else
+                return false;
         });
         return view('main',['user'=>request()->user(),'routes'=>$routes]);
     }

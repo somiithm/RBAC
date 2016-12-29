@@ -15,7 +15,14 @@ Route::get('/loginPage','MainController@showLoginPage');
 Route::post('login','AuthController@login');
 Route::get('logout','AuthController@logout');
 
-Route::group(['middleware'=>'rbac'],function(){
+/**
+ * kept open for demo, should allow only admin to access
+ */
+Route::resource('/users','UserController',['only'=>['index','show','store','update']]);
+Route::resource('/roles','RoleController',['only'=>['index','show','store','update']]);
+Route::resource('/resources','ResourceController',['only'=>['index','show','store']]);
+
+Route::group(['group_name'=>'demo','middleware'=>'rbac'],function(){
     Route::get('/demo_RWD/R',[ 'resource'=>'demo_RWD', 'action'=>'READ', 'uses'=>'MainController@displayAccess']);
     Route::get('/demo_RWD/W',[ 'resource'=>'demo_RWD', 'action'=>'WRITE', 'uses'=>'MainController@displayAccess']);
     Route::get('/demo_RWD/D',[ 'resource'=>'demo_RWD', 'action'=>'DELETE', 'uses'=>'MainController@displayAccess']);
